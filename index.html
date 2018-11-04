@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="default.css">
+    <link rel="stylesheet" href="./prism/prism.css">
+    <title>皮卡丘</title>
+    <!-- <style>
+        div.preview {
+            background-color: #FFE600;
+        }
+
+        div.eye {
+            background-color: black;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        div.eye.left {
+            right: 50%;
+            margin-right: 65px;
+        }
+
+        div.eye.right {
+            left: 50%;
+            margin-left: 65px;
+        }
+
+        div.eye::after {
+            content: "";
+            position: absolute;
+            background: white;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            left: 6px;
+            top: 1px;
+            border: 4px solid black;
+        }
+
+        div.nose {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0px;
+            height: 0px;
+            border-top: 7px solid black;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            box-shadow: 0 -1px 0 black;
+            top: 26px;
+        }
+
+        div.nose::after {
+            content: "";
+            position: absolute;
+            display: block;
+            left: -9px;
+            top: -12px;
+            width: 18px;
+            height: 5px;
+            background: black;
+            border-top-right-radius: 9px 5px;
+            border-top-left-radius: 9px 5px;
+        }
+
+        div.upperLip {
+            top: 43px;
+            position: absolute;
+            width: 62px;
+            height: 20px;
+            background-color: #FFE600;
+            border: 2px solid black;
+            z-index: 1;
+        }
+
+        div.upperLip.left {
+            right: 50%;
+            border-top: none;
+            border-right: none;
+            border-bottom-left-radius: 46px 23px;
+            transform: rotate(-25deg);
+        }
+
+        div.upperLip.right {
+            left: 50%;
+            border-top: none;
+            border-left: none;
+            border-bottom-right-radius: 46px 23px;
+            transform: rotate(25deg);
+        }
+
+        div.mouth {
+            position: absolute;
+            margin-top: 50px;
+            height: 110px;
+            width: 165px;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+        }
+
+        div.tongue {
+            position: absolute;
+            width: 100%;
+            height: 608px;
+            background: #990513;
+            border: 3px solid black;
+            border-bottom-left-radius: 90px 608px;
+            border-bottom-right-radius: 90px 608px;
+            bottom: 0px;
+            margin-left: -3px;
+            overflow: hidden;
+        }
+
+        div.tongue::after {
+            position: absolute;
+            content: "";
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #FC4A62;
+            bottom: -15px;
+        }
+
+        div.blush {
+            top: 84px;
+            position: absolute;
+            width: 62px;
+            height: 62px;
+            border: 2px solid black;
+            border-radius: 50%;
+            background-color: #f00;
+            z-index: 1
+        }
+
+        div.blush.left {
+            margin-right: 91px;
+            right: 50%
+        }
+
+        div.blush.right {
+            margin-left: 91px;
+            left: 50%
+        }
+    </style> -->
+</head>
+
+<body>
+    <div class="code-wrapper">
+        <pre class="styleEditor"><code class="styleCode"></code></pre>
+    </div>
+    <div class="preview">
+        <div class="wrapper">
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="nose"></div>
+            <div class="upperLip left"></div>
+            <div class="upperLip right"></div>
+            <div class="blush left"></div>
+            <div class="blush right"></div>
+            <div class="mouth">
+                <div class="tongue"></div>
+            </div>
+        </div>
+    </div>
+    <script src="./prism/prism.js"></script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
