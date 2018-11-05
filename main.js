@@ -27,7 +27,7 @@ insertAnimation.prototype = {
   addText: function(newText, lang) {
     return new Promise((res, rej) => {
       let currentLang = lang || this.lang;
-      let fn 
+      let fn;
       if (!newText) {
         fn = this.strategy[currentLang] || this.strategy["text"];
         fn(this.el, this.text);
@@ -36,18 +36,18 @@ insertAnimation.prototype = {
       } else {
         let count = 0;
         let self = this;
-        let timeId = window.setTimeout(function run(){
+        let timeId = window.setTimeout(function run() {
           if (count < newText.length) {
-              self.text += newText[count];
-              fn = self.strategy[currentLang] || self.strategy["text"];
-              fn(self.el, self.text);
-              self.eachCallBack(self.el, self.text);
-              count++;
-              timeId = window.setTimeout(run,self.time)
-            } else {
-              res();
-            }
-      }, self.time);
+            self.text += newText[count];
+            fn = self.strategy[currentLang] || self.strategy["text"];
+            fn(self.el, self.text);
+            self.eachCallBack(self.el, self.text);
+            count++;
+            timeId = window.setTimeout(run, self.time);
+          } else {
+            res();
+          }
+        }, self.time);
       }
     });
   }
@@ -57,16 +57,15 @@ let cssCode = document.querySelector(".styleCode");
 let cssCodeWrapper = document.querySelector(".styleEditor");
 
 let insertCss = new insertAnimation({
-    el: cssCode,
-    lang: "css",
-    time: 20,
-    eachCallBack: (el, text) => {
-      cssCodeWrapper.scrollTop = cssCodeWrapper.scrollHeight;
-    }
-  });
+  el: cssCode,
+  lang: "css",
+  time: 0,
+  eachCallBack: (el, text) => {
+    cssCodeWrapper.scrollTop = cssCodeWrapper.scrollHeight;
+  }
+});
 
-  
-  let testText = `
+let testText = `
 /*一个黄色的底*/
 div.preview {
     background-color: #FFE600;
@@ -189,7 +188,7 @@ div.tongue::after {
     background-color: #FC4A62;
     bottom: -15px;
 }
-/*高光*/
+/*腮红*/
 div.blush {
     top: 84px;
     position: absolute;
@@ -211,5 +210,13 @@ div.blush.right {
     left: 50%
 }
 /*完工，哈哈，这个皮卡丘就当送给儿子啦！*/
-  `
-  insertCss.addText(testText)
+/*试试点点鼻子呗！*/
+  `;
+insertCss.addText(testText);
+
+let audio = document.getElementById("bgMusic");
+let nose = document.getElementsByClassName('nose')[0]
+nose.addEventListener("click",()=>{
+    audio.currentTime = 0;
+    audio.play();
+})

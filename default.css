@@ -27,3 +27,14 @@ div.wrapper{
     height: 160px;
     position: relative;
 }
+
+div.nose:hover{
+    animation:nose .23s infinite 
+}
+
+@keyframes nose {
+    0% { transform: translateX(-50%)rotate(0deg); }
+    33% { transform:translateX(-50%) rotate(-5deg); }
+    67% { transform: translateX(-50%) rotate(5deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
+  }
