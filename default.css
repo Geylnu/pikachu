@@ -29,11 +29,31 @@ div.wrapper{
 }
 
 div.nose:hover{
-    animation:nose .23s infinite 
+    animation:nose 3s 
+}
+
+.code-wrapper{
+    position: relative;
+}
+
+.code-wrapper .button-wrapper{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+.button-wrapper button{
+    display: block;
+    font-size: 15px;
+    width: 4em;
+    padding: 0.4em;
+    background-color: rgb(182, 182, 182);
+    margin-top: 1em;
 }
 
 @keyframes nose {
-    0% { transform: translateX(-50%)rotate(0deg); }
+    0% { transform: translateX (-50%)rotate(0deg); }
     33% { transform:translateX(-50%) rotate(-5deg); }
     67% { transform: translateX(-50%) rotate(5deg); }
     100% { transform: translateX(-50%) rotate(0deg); }

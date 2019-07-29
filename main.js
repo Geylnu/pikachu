@@ -1,4 +1,4 @@
-let styleTag = document.createElement("style");
+let styleTag = document.createElement("style")
 styleTag.classList.add(".styleTag");
 document.body.appendChild(styleTag);
 
@@ -12,19 +12,19 @@ function insertAnimation({ el, lang, time, eachCallBack }) {
 
 insertAnimation.prototype = {
   strategy: {
-    text: function(el, text) {
+    text: function (el, text) {
       el.innerHTML = text;
     },
-    css: function(el, text) {
+    css: function (el, text) {
       styleTag.innerHTML = text;
       el.innerHTML = Prism.highlight(text, Prism.languages.css, "css");
     },
-    markdown: function(el, text) {
+    markdown: function (el, text) {
       el.innerHTML = marked(text);
     }
   },
   constructor: insertAnimation,
-  addText: function(newText, lang) {
+  addText: function (newText, lang) {
     return new Promise((res, rej) => {
       let currentLang = lang || this.lang;
       let fn;
@@ -34,36 +34,81 @@ insertAnimation.prototype = {
         this.eachCallBack(this.el, this.text);
         res();
       } else {
+        this.newText = newText
         let count = 0;
         let self = this;
-        let timeId = window.setTimeout(function run() {
-          if (count < newText.length) {
-            self.text += newText[count];
+        self.timeId = window.setTimeout(function run() {
+          if (self.skip) {
+            self.text = newText
             fn = self.strategy[currentLang] || self.strategy["text"];
             fn(self.el, self.text);
             self.eachCallBack(self.el, self.text);
-            count++;
-            timeId = window.setTimeout(run, self.time);
+            res()
           } else {
-            res();
+            if (count < newText.length) {
+              let rate = 1
+              if (self.time < 1000/60){
+                rate = (1000/60) / self.time
+              }
+              let addContent = Array.prototype.slice.call(newText,count,count+rate)
+              self.text += addContent.join('')
+              fn = self.strategy[currentLang] || self.strategy["text"];
+              fn(self.el, self.text);
+              self.eachCallBack(self.el, self.text);
+              count+=rate;
+              self.timeId = window.setTimeout(run, self.time);
+            } else {
+              res();
+            }
           }
         }, self.time);
       }
     });
+  },
+  replay(){
+    this.skip = false
+    window.clearTimeout(this.timeId)
+    styleTag.innerHTML = ''
+    this.el.innerHTML = '';
+    this.text = ''
+    this.time = 20
+     return this.addText(this.newText)
+
   }
 };
 
 let cssCode = document.querySelector(".styleCode");
 let cssCodeWrapper = document.querySelector(".styleEditor");
+let quick = document.querySelector('.quick')
+let slow = document.querySelector('.slow')
+let skip = document.querySelector('.skip')
+let replay =document.querySelector('.replay')
 
 let insertCss = new insertAnimation({
   el: cssCode,
   lang: "css",
-  time: 0,
+  time: 20,
   eachCallBack: (el, text) => {
     cssCodeWrapper.scrollTop = cssCodeWrapper.scrollHeight;
   }
 });
+
+quick.addEventListener('click', () => {
+  
+  insertCss.time /= 2
+})
+
+slow.addEventListener('click', () => {
+  insertCss.time *= 2
+})
+
+skip.addEventListener('click', () => {
+  insertCss.skip = true
+})
+
+replay.addEventListener('click',()=>{
+  insertCss.replay()
+})
 
 let testText = `
 /*一个黄色的底*/
@@ -209,14 +254,14 @@ div.blush.right {
     margin-left: 91px;
     left: 50%
 }
-/*完工，哈哈，这个皮卡丘就当送给儿子啦！*/
+/*完工！*/
 /*试试点点鼻子呗！*/
   `;
 insertCss.addText(testText);
 
 let audio = document.getElementById("bgMusic");
 let nose = document.getElementsByClassName('nose')[0]
-nose.addEventListener("click",()=>{
-    audio.currentTime = 0;
-    audio.play();
+nose.addEventListener("click", () => {
+  audio.currentTime = 0;
+  audio.play();
 })
